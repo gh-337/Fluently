@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "992995617126",
+    "project_id": "fluently-ac69e",
+    "storage_bucket": "fluently-ac69e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:992995617126:android:26099400e66bc428e0c0a7",
+        "android_client_info": {
+          "package_name": "com.example.fluently"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "992995617126-6gm413l1e5me7qmjo4d55thtl3qcs6b8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIYx7hXtuIvwZWDcMh-jommva4eIYRWE0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "992995617126-6gm413l1e5me7qmjo4d55thtl3qcs6b8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
