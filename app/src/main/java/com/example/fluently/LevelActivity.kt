@@ -22,7 +22,52 @@ class LevelActivity : AppCompatActivity() {
         binding= ActivityLevelBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        intent.extras?.getString(Const.LANGUAGE)
+        val imageName = "g";
+
+        val storageRef  = FirebaseStorage.getInstance().reference.child("images/$imageName.jpg")
+        val localfile = File.createTempFile("tempImage", "jpg")//створюєм тимчасовий файл
+
+        val progressDialog = ProgressDialog(this)//вивід текту поки чекаємо картинку
+        progressDialog.setMessage("Fetching image....")
+        progressDialog.setCancelable(false)
+        progressDialog.show()
+
+        storageRef.getFile(localfile).addOnSuccessListener{
+            if(progressDialog.isShowing)//якщо вікно є то воно закривається
+                progressDialog.dismiss()
+
+
+            val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)//перетворює файл у зображення
+            binding.imageView.setImageBitmap(bitmap)//отриманий об'єкт Bitmap встановлюється в якості зображення в ImageView
+
+        }.addOnFailureListener{//якщо ні то
+
+            if(progressDialog.isShowing)//якщо вікно є то воно закривається
+                progressDialog.dismiss()
+
+            Toast.makeText(this,"Failed to retrieve thr image",Toast.LENGTH_SHORT).show()
+            //вивід на екран повідомлення що в нас помилка
+
+
+        }
+
+
+
+
+        binding.getImage.setOnClickListener{
+            //if(){ }
+        }
+        }
+
+
+
+
+
+
+
+
+        /*new*/
+        /*intent.extras?.getString(Const.LANGUAGE)
         intent.extras?.getString(Const.DIFFICULT)
         intent.extras?.getInt(Const.LEVEL)
         when (intent.extras?.getString(Const.LANGUAGE)) {
@@ -31,11 +76,22 @@ class LevelActivity : AppCompatActivity() {
             }
             "deutsch" -> {
                 Toast.makeText(this, "deutsch", Toast.LENGTH_SHORT).show()
-            }
+            }*/
+                /*---new----*/
 
 
 
 
+
+
+
+
+
+
+
+
+
+        /*
         binding.getImage.setOnClickListener{//чекаємо на натискання кнопки
 
             val progressDialog = ProgressDialog(this)//вивід текту поки чекаємо картинку
@@ -76,6 +132,7 @@ class LevelActivity : AppCompatActivity() {
         Toast.makeText(this, intent.extras?.getString(Const.DIFFICULT), Toast.LENGTH_SHORT).show()
         Toast.makeText(this, intent.extras?.getInt(Const.LEVEL).toString(), Toast.LENGTH_SHORT).show()
     }
+    */
 
     /*     має бути перевірка...
             when (intent.extras?.getString(Const.LANGUAGE)) {
