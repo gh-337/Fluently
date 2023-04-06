@@ -32,9 +32,9 @@
         app:srcCompat="@drawable/buttongoback" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="358dp"
-        android:layout_height="172dp"
+        android:id="@+id/ImgLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -55,11 +55,11 @@
         app:srcCompat="@drawable/woman" />
 
     <EditText
-        android:id="@+id/etImageId"
+        android:id="@+id/EditTextLevel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="iii"
+        android:hint="Enter word"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,20 +68,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.556" />
 
-    <ImageButton
-        android:id="@+id/getImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_ok"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.824"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.546"
-        app:srcCompat="@drawable/btn_ok" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-<!--авцвац-->
