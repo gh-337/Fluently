@@ -22,7 +22,7 @@ class LevelActivity : AppCompatActivity() {
         binding= ActivityLevelBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val imageName = "g";
+        val imageName = "g"
 
         val storageRef  = FirebaseStorage.getInstance().reference.child("images/$imageName.jpg")
         val localfile = File.createTempFile("tempImage", "jpg")//створюєм тимчасовий файл
@@ -55,8 +55,51 @@ class LevelActivity : AppCompatActivity() {
 
 
         binding.getImage.setOnClickListener{
-            //if(){ }
+           if(binding.etImageId.text.toString() == "g"){
+               val imageName = "p"
+               val storageRef  = FirebaseStorage.getInstance().reference.child("images/$imageName.jpg")
+               val localfile = File.createTempFile("tempImage", "jpg")//створюєм тимчасовий файл
+
+               val progressDialog = ProgressDialog(this)//вивід текту поки чекаємо картинку
+               progressDialog.setMessage("Fetching image....")
+               progressDialog.setCancelable(false)
+               progressDialog.show()
+
+               storageRef.getFile(localfile).addOnSuccessListener{
+                   if(progressDialog.isShowing)//якщо вікно є то воно закривається
+                       progressDialog.dismiss()
+
+
+                   val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)//перетворює файл у зображення
+                   binding.imageView.setImageBitmap(bitmap)//отриманий об'єкт Bitmap встановлюється в якості зображення в ImageView
+
+               }.addOnFailureListener{//якщо ні то
+
+                   if(progressDialog.isShowing)//якщо вікно є то воно закривається
+                       progressDialog.dismiss()
+
+                   Toast.makeText(this,"Failed to retrieve thr image",Toast.LENGTH_SHORT).show()
+                   //вивід на екран повідомлення що в нас помилка
+
+
+               }
+           }
+            else{
+               Toast.makeText(this,"Wrong word",Toast.LENGTH_SHORT).show()
+           }
         }
+
+
+
+
+
+
+
+
+
+
+
+
         }
 
 
