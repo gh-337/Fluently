@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "454611362269",
-    "project_id": "nv-par-41",
-    "storage_bucket": "nv-par-41.appspot.com"
+    "project_number": "317867005343",
+    "project_id": "fluently-b9723",
+    "storage_bucket": "fluently-b9723.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:454611362269:android:62f0f747ce37b120845634",
+        "mobilesdk_app_id": "1:317867005343:android:19f5e3f09c0cc020d4d9aa",
         "android_client_info": {
-          "package_name": "com.example.nv"
+          "package_name": "com.example.fluently"
         }
       },
       "oauth_client": [
         {
-          "client_id": "454611362269-e43p0m3dobjbuot4dgaggrba1uob77s5.apps.googleusercontent.com",
+          "client_id": "317867005343-ikkfcleh6taglglbj97sdur9uj5ahe43.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDy55kne5vq9VxEf-e51VldnL0-2M36M04"
+          "current_key": "AIzaSyC433syrOj-X6moQrE4whOXXgyLQ92La3M"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "454611362269-e43p0m3dobjbuot4dgaggrba1uob77s5.apps.googleusercontent.com",
+              "client_id": "317867005343-ikkfcleh6taglglbj97sdur9uj5ahe43.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
