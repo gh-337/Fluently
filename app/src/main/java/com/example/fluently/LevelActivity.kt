@@ -21,34 +21,36 @@ class LevelActivity : AppCompatActivity() {
         binding= ActivityLevelBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.getImage.setOnClickListener{
+        binding.getImage.setOnClickListener{//чекаємо на натискання кнопки
 
-            val progressDialog = ProgressDialog(this)
+            val progressDialog = ProgressDialog(this)//вивід текту поки чекаємо картинку
             progressDialog.setMessage("Fetching image....")
             progressDialog.setCancelable(false)
             progressDialog.show()
 
 
-            val imageName = binding.etImageId.text.toString()
-            val storageRef  = FirebaseStorage.getInstance().reference.child("images/$imageName.jpg")
+            val imageName = binding.etImageId.text.toString() // текст з поля записуєм у змінну
+            val storageRef  = FirebaseStorage.getInstance().reference.child("images/$imageName.jpg") //у змінну записуєм шлях до картинки у бд
 
-            val localfile = File.createTempFile("tempImage", "jpg")
-            storageRef.getFile(localfile).addOnSuccessListener {
+            val localfile = File.createTempFile("tempImage", "jpg")//створюєм тимчасовий файл
+            storageRef.getFile(localfile).addOnSuccessListener{
+            //завантажує файл з бд у локал файл
+            //якщо завантаження завершиться успішно виконається код
 
-                if(progressDialog.isShowing)
+                if(progressDialog.isShowing)//якщо вікно є то воно закривається
                     progressDialog.dismiss()
 
 
-                val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
-                binding.imageView.setImageBitmap(bitmap)
+                val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)//перетворює файл у зображення
+                binding.imageView.setImageBitmap(bitmap)//отриманий об'єкт Bitmap встановлюється в якості зображення в ImageView
 
+            }.addOnFailureListener{//якщо ні то
 
-            }.addOnFailureListener{
-
-                if(progressDialog.isShowing)
+                if(progressDialog.isShowing)//якщо вікно є то воно закривається
                     progressDialog.dismiss()
 
                 Toast.makeText(this,"Failed to retrieve thr image",Toast.LENGTH_SHORT).show()
+                //вивід на екран повідомлення що в нас помилка
 
             }
         }
