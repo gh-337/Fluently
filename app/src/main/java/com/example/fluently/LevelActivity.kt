@@ -1,5 +1,6 @@
 package com.example.fluently
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -20,7 +21,6 @@ class LevelActivity : AppCompatActivity() {
     }
 
     /*     має бути перевірка...
-
             when (intent.extras?.getString(Const.LANGUAGE)) {
             "eng" -> {
                 Toast.makeText(this, "eng", Toast.LENGTH_SHORT).show()
@@ -35,5 +35,8 @@ class LevelActivity : AppCompatActivity() {
 
     fun backToLevels(view: View){
         finish()
+    }
+    fun youPressButton(@Suppress("UNUSED_PARAMETER")view : View){
+        Toast.makeText(this, "you pressed button OK", Toast.LENGTH_SHORT).show()
     }
 }
