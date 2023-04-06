@@ -2,6 +2,7 @@ package com.example.fluently
 
 import android.R
 import android.app.ProgressDialog
+import android.app.ProgressDialog.show
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -20,6 +21,20 @@ class LevelActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding= ActivityLevelBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        intent.extras?.getString(Const.LANGUAGE)
+        intent.extras?.getString(Const.DIFFICULT)
+        intent.extras?.getInt(Const.LEVEL)
+        when (intent.extras?.getString(Const.LANGUAGE)) {
+            "eng" -> {
+                Toast.makeText(this, "eng", Toast.LENGTH_SHORT).show()
+            }
+            "deutsch" -> {
+                Toast.makeText(this, "deutsch", Toast.LENGTH_SHORT).show()
+            }
+
+
+
 
         binding.getImage.setOnClickListener{//чекаємо на натискання кнопки
 
