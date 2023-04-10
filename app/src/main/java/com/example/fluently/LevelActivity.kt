@@ -1,31 +1,38 @@
 package com.example.fluently
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fluently.databinding.ActivityLevelBinding
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 //111
 
 
 class LevelActivity : AppCompatActivity() {
     lateinit var binding: ActivityLevelBinding
-
+    val db = FirebaseFirestore.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivityLevelBinding.inflate(layoutInflater)
+        binding = ActivityLevelBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val language = intent.extras?.getString(Const.LANGUAGE)
         val difficult = intent.extras?.getString(Const.DIFFICULT)
         val level = intent.extras?.getInt(Const.LEVEL).toString()
 
-        val db = FirebaseFirestore.getInstance()
 
 
-        db.collection("hard").document("").collection("Monday").document("Glj70bAl62nUL1IPN60w").get().addOnSuccessListener {
+
+ /*       db.collection("hard").document("").collection("Monday").document("Glj70bAl62nUL1IPN60w")
+            .get().addOnSuccessListener {
             Log.d("test", it.data["subject"].toString())
         }
+    */
+
+
+
 
 
 
@@ -115,8 +122,27 @@ class LevelActivity : AppCompatActivity() {
 
 
         }
+    var txt=""
 
-
+    fun getData(view : View) {
+       db.collection("hard").document("level").collection("7_level")
+            .get()
+            .addOnSuccessListener{
+                for(documentSnapshot : DocumentSnapshot in it.documents) {
+                    if(documentSnapshot.id=="n_p_p"){
+                    val surname = documentSnapshot.getString("en").toString()
+                    val s = documentSnapshot.getString("id").toString()
+                    val name = documentSnapshot.getString("ger").toString()
+                    val patronymic = documentSnapshot.getString("pl").toString()
+                    txt = "$surname $name $patronymic $s"
+                        Toast.makeText(this,txt,Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+            .addOnFailureListener {
+                Log.w("TAG", "Error getting documents: ")
+            }
+    }
 
 
 
