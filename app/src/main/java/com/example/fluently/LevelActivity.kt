@@ -1,30 +1,50 @@
 package com.example.fluently
 
-import android.R
-import android.app.ProgressDialog
-import android.app.ProgressDialog.show
-import android.graphics.BitmapFactory
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import com.example.fluently.databinding.ActivityEasyLevelBinding
+import androidx.appcompat.app.AppCompatActivity
 import com.example.fluently.databinding.ActivityLevelBinding
-import com.google.android.material.transition.MaterialContainerTransform.ProgressThresholds
-import com.google.firebase.storage.FirebaseStorage
-import java.io.File
+import com.google.firebase.firestore.FirebaseFirestore
+
 
 class LevelActivity : AppCompatActivity() {
     lateinit var binding: ActivityLevelBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLevelBinding.inflate(layoutInflater)
+        binding= ActivityLevelBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val language = intent.extras?.getString(Const.LANGUAGE)
+        val difficult = intent.extras?.getString(Const.DIFFICULT)
+        val level = intent.extras?.getInt(Const.LEVEL).toString()
 
-        val imageName = "m"
+        val db = FirebaseFirestore.getInstance()
 
-        val storageRef  = FirebaseStorage.getInstance().reference.child("images/easy/10/$imageName.jpg")
+
+        db.collection("hard").document("").collection("Monday").document("Glj70bAl62nUL1IPN60w").get().addOnSuccessListener {
+            Log.d("test", it.data["subject"].toString())
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*val storageRef  = FirebaseStorage.getInstance().reference.child("images/easy/10/$imageName.jpg")
         val localfile = File.createTempFile("tempImage", "jpg")//створюєм тимчасовий файл
 
         val progressDialog = ProgressDialog(this)//вивід текту поки чекаємо картинку
@@ -87,7 +107,7 @@ class LevelActivity : AppCompatActivity() {
             else{
                Toast.makeText(this,"Wrong word",Toast.LENGTH_SHORT).show()
            }
-        }
+        }*/
 
 
 
