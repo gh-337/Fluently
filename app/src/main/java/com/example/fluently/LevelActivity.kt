@@ -19,12 +19,12 @@ class LevelActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivityLevelBinding.inflate(layoutInflater)
+        binding = ActivityLevelBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val imageName = "g"
+        val imageName = "m"
 
-        val storageRef  = FirebaseStorage.getInstance().reference.child("images/$imageName.jpg")
+        val storageRef  = FirebaseStorage.getInstance().reference.child("images/easy/10/$imageName.jpg")
         val localfile = File.createTempFile("tempImage", "jpg")//створюєм тимчасовий файл
 
         val progressDialog = ProgressDialog(this)//вивід текту поки чекаємо картинку
@@ -55,9 +55,9 @@ class LevelActivity : AppCompatActivity() {
 
 
         binding.getImage.setOnClickListener{
-           if(binding.etImageId.text.toString() == "g"){
-               val imageName = "p"
-               val storageRef  = FirebaseStorage.getInstance().reference.child("images/$imageName.jpg")
+           if(binding.etImageId.text.toString() == "m"){
+               val imageName = "w"
+               val storageRef  = FirebaseStorage.getInstance().reference.child("images/easy/10/$imageName.jpg")
                val localfile = File.createTempFile("tempImage", "jpg")//створюєм тимчасовий файл
 
                val progressDialog = ProgressDialog(this)//вивід текту поки чекаємо картинку
@@ -88,13 +88,6 @@ class LevelActivity : AppCompatActivity() {
                Toast.makeText(this,"Wrong word",Toast.LENGTH_SHORT).show()
            }
         }
-
-
-
-
-
-
-
 
 
 
