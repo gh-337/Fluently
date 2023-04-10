@@ -1,5 +1,7 @@
 package com.example.fluently
 
+import android.app.ProgressDialog
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -8,6 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.fluently.databinding.ActivityLevelBinding
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import org.checkerframework.checker.units.qual.s
+import java.io.File
+
 //111
 
 
@@ -18,18 +24,15 @@ class LevelActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLevelBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val language = intent.extras?.getString(Const.LANGUAGE)
-        val difficult = intent.extras?.getString(Const.DIFFICULT)
-        val level = intent.extras?.getInt(Const.LEVEL).toString()
+        //val language = intent.extras?.getString(Const.LANGUAGE) //eng deutsch poland
+        //val difficult = intent.extras?.getString(Const.DIFFICULT) //easy middle hard
+        //val level = intent.extras?.getInt(Const.LEVEL).toString() //
+        val language = "pl" //eng deutsch poland
+        val difficult = intent.extras?.getString(Const.DIFFICULT).toString() //easy middle hard
+        val level = "7_level" //
+        val npp=1
 
-
-
-
- /*       db.collection("hard").document("").collection("Monday").document("Glj70bAl62nUL1IPN60w")
-            .get().addOnSuccessListener {
-            Log.d("test", it.data["subject"].toString())
-        }
-    */
+        getDataAct(language, difficult, level, npp)
 
 
 
@@ -124,7 +127,7 @@ class LevelActivity : AppCompatActivity() {
         }
     var txt=""
 
-    fun getData(view : View) {
+    /*fun getData(view : View) {
        db.collection("hard").document("level").collection("7_level")
             .get()
             .addOnSuccessListener{
@@ -142,6 +145,74 @@ class LevelActivity : AppCompatActivity() {
             .addOnFailureListener {
                 Log.w("TAG", "Error getting documents: ")
             }
+    }*/
+
+    fun getDataAct(language:String, difficult:String, level:String, npp:Int ) {
+        var en = ""
+        var id = "";
+        //val myString: String = "Це мій текст"String
+        var ger = ""
+        var pl = ""
+        db.collection(difficult).document("level").collection(level)
+            .get()
+            .addOnSuccessListener {
+                for (documentSnapshot: DocumentSnapshot in it.documents) {
+                    if (documentSnapshot.id == npp.toString()) {
+                        en = documentSnapshot.getString("en").toString()
+                        id = documentSnapshot.getString("id").toString()
+                        ger = documentSnapshot.getString("de").toString()
+                        pl = documentSnapshot.getString("pl").toString()
+                        txt = "$id $en $ger $pl "
+                        Toast.makeText(this, "inside for", Toast.LENGTH_SHORT).show()
+
+                    }
+                }
+            }
+            .addOnFailureListener {
+                Log.w("TAG", "Error getting documents: ")
+            }
+
+        val nameImg = ".jpg"
+        Toast.makeText(this, txt, Toast.LENGTH_SHORT).show()
+        val storageRef = FirebaseStorage.getInstance().reference.child("images/easy/1/$id.jpg")
+        val localfile = File.createTempFile("tempImage", "jpg")//створюєм тимчасовий файл
+
+        val progressDialog = ProgressDialog(this)//вивід текту поки чекаємо картинку
+        progressDialog.setMessage("Fetching image....")
+        progressDialog.setCancelable(false)
+        progressDialog.show()
+
+        storageRef.getFile(localfile).addOnSuccessListener {
+            if (progressDialog.isShowing)//якщо вікно є то воно закривається
+                progressDialog.dismiss()
+
+
+            val bitmap =
+                BitmapFactory.decodeFile(localfile.absolutePath)//перетворює файл у зображення
+            binding.imageView.setImageBitmap(bitmap)//отриманий об'єкт Bitmap встановлюється в якості зображення в ImageView
+
+        }.addOnFailureListener {//якщо ні то
+
+            if (progressDialog.isShowing)//якщо вікно є то воно закривається
+                progressDialog.dismiss()
+
+            Toast.makeText(this, "Failed to retrieve thr image", Toast.LENGTH_SHORT).show()
+            //вивід на екран повідомлення що в нас помилка
+
+
+        }
+
+        binding.getImage.setOnClickListener {
+            if (binding.etImageId.text.toString() == "en") {
+                var npp = npp + 1
+                if (npp == 11) {
+                    finish()//треба викликати backtolevels
+                }
+                getDataAct(language, difficult, level, npp)
+            }
+        }
+
+
     }
 
 
