@@ -167,6 +167,15 @@ class LevelActivity : AppCompatActivity() {
                         txt = "$id $en $ger $pl "
                         Toast.makeText(this, txt, Toast.LENGTH_SHORT).show()
                         openImage(id)
+                        binding.getImage.setOnClickListener {
+                            if (binding.etImageId.text.toString() == en) {
+                                var npp = npp + 1
+                                if (npp == 11) {
+                                    finish()//треба викликати backtolevels
+                                }
+                                getDataAct(language, difficult, level, npp)
+                            }
+                        }
                     }
                 }
             }
@@ -203,7 +212,7 @@ class LevelActivity : AppCompatActivity() {
 
         }*/
 
-        binding.getImage.setOnClickListener {
+        /*binding.getImage.setOnClickListener {
             if (binding.etImageId.text.toString() == "en") {
                 var npp = npp + 1
                 if (npp == 11) {
@@ -211,7 +220,7 @@ class LevelActivity : AppCompatActivity() {
                 }
                 getDataAct(language, difficult, level, npp)
             }
-        }
+        }*/
 
 
     }
@@ -330,9 +339,8 @@ class LevelActivity : AppCompatActivity() {
 
             Toast.makeText(this, "Failed to retrieve thr image", Toast.LENGTH_SHORT).show()
             //вивід на екран повідомлення що в нас помилка
-
-
         }
+
     }
     fun backToLevels(view: View){
         finish()
