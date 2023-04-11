@@ -125,7 +125,7 @@ class LevelActivity : AppCompatActivity() {
 
 
         }
-    var txt=""
+
 
     /*fun getData(view : View) {
        db.collection("hard").document("level").collection("7_level")
@@ -148,6 +148,7 @@ class LevelActivity : AppCompatActivity() {
     }*/
 
     fun getDataAct(language:String, difficult:String, level:String, npp:Int ) {
+        var txt="11"
         var en = ""
         var id = "";
         //val myString: String = "Це мій текст"String
@@ -156,6 +157,7 @@ class LevelActivity : AppCompatActivity() {
         db.collection(difficult).document("level").collection(level)
             .get()
             .addOnSuccessListener {
+                Toast.makeText(this, "before for", Toast.LENGTH_SHORT).show()
                 for (documentSnapshot: DocumentSnapshot in it.documents) {
                     if (documentSnapshot.id == npp.toString()) {
                         en = documentSnapshot.getString("en").toString()
@@ -163,8 +165,8 @@ class LevelActivity : AppCompatActivity() {
                         ger = documentSnapshot.getString("de").toString()
                         pl = documentSnapshot.getString("pl").toString()
                         txt = "$id $en $ger $pl "
-                        Toast.makeText(this, "inside for", Toast.LENGTH_SHORT).show()
-
+                        Toast.makeText(this, txt, Toast.LENGTH_SHORT).show()
+                        openImage(id)
                     }
                 }
             }
@@ -172,8 +174,7 @@ class LevelActivity : AppCompatActivity() {
                 Log.w("TAG", "Error getting documents: ")
             }
 
-        val nameImg = ".jpg"
-        Toast.makeText(this, txt, Toast.LENGTH_SHORT).show()
+        /*Toast.makeText(this, txt, Toast.LENGTH_SHORT).show()
         val storageRef = FirebaseStorage.getInstance().reference.child("images/easy/1/$id.jpg")
         val localfile = File.createTempFile("tempImage", "jpg")//створюєм тимчасовий файл
 
@@ -200,7 +201,7 @@ class LevelActivity : AppCompatActivity() {
             //вивід на екран повідомлення що в нас помилка
 
 
-        }
+        }*/
 
         binding.getImage.setOnClickListener {
             if (binding.etImageId.text.toString() == "en") {
@@ -301,6 +302,38 @@ class LevelActivity : AppCompatActivity() {
             }
         }*/
 
+    fun openImage(id : String)
+    {
+        Toast.makeText(this, "inside open", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, id, Toast.LENGTH_SHORT).show()
+        val storageRef = FirebaseStorage.getInstance().reference.child("images/easy/1/$id.jpg")
+        val localfile = File.createTempFile("tempImage", "jpg")//створюєм тимчасовий файл
+
+        val progressDialog = ProgressDialog(this)//вивід текту поки чекаємо картинку
+        progressDialog.setMessage("Fetching image....")
+        progressDialog.setCancelable(false)
+        progressDialog.show()
+
+        storageRef.getFile(localfile).addOnSuccessListener {
+            if (progressDialog.isShowing)//якщо вікно є то воно закривається
+                progressDialog.dismiss()
+
+
+            val bitmap =
+                BitmapFactory.decodeFile(localfile.absolutePath)//перетворює файл у зображення
+            binding.imageView.setImageBitmap(bitmap)//отриманий об'єкт Bitmap встановлюється в якості зображення в ImageView
+
+        }.addOnFailureListener {//якщо ні то
+
+            if (progressDialog.isShowing)//якщо вікно є то воно закривається
+                progressDialog.dismiss()
+
+            Toast.makeText(this, "Failed to retrieve thr image", Toast.LENGTH_SHORT).show()
+            //вивід на екран повідомлення що в нас помилка
+
+
+        }
+    }
     fun backToLevels(view: View){
         finish()
     }
