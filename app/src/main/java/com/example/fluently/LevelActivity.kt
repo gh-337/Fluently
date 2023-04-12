@@ -155,7 +155,7 @@ class LevelActivity : AppCompatActivity() {
                         pl = documentSnapshot.getString("pl").toString()
                         txt = "$id $en $ger $pl "
                         Toast.makeText(this, language, Toast.LENGTH_SHORT).show()
-                        openImage(id)
+                        openImage(id, difficult, level)
                         binding.getImage.setOnClickListener {
                             /*if (binding.etImageId.text.toString() == pl) {
                                 var npp = npp + 1
@@ -370,11 +370,11 @@ class LevelActivity : AppCompatActivity() {
         }*/
 
 
-    fun openImage(id : String)
+    fun openImage(id : String, difficult: String, level: String)
     {
         Toast.makeText(this, "inside open", Toast.LENGTH_SHORT).show()
         Toast.makeText(this, id, Toast.LENGTH_SHORT).show()
-        val storageRef = FirebaseStorage.getInstance().reference.child("images/easy/1/$id.jpg")
+        val storageRef = FirebaseStorage.getInstance().reference.child("images/$difficult/$level/$id.jpg")
         val localfile = File.createTempFile("tempImage", "jpg")//створюєм тимчасовий файл
 
         val progressDialog = ProgressDialog(this)//вивід текту поки чекаємо картинку
