@@ -110,8 +110,6 @@ class LevelActivity : AppCompatActivity() {
 
 
 
-
-
         }
 
 
