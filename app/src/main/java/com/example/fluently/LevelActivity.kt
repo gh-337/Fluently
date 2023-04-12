@@ -20,6 +20,7 @@ class LevelActivity : AppCompatActivity() {
         Toast.makeText(this, intent.extras?.getInt(Const.LEVEL).toString(), Toast.LENGTH_SHORT).show()
     }
 
+
     /*     має бути перевірка...
 
             when (intent.extras?.getString(Const.LANGUAGE)) {
