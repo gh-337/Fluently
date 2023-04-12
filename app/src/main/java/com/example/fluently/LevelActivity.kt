@@ -29,7 +29,7 @@ class LevelActivity : AppCompatActivity() {
         val difficult = intent.extras?.getString(Const.DIFFICULT).toString() //easy middle hard
         val level = intent.extras?.getInt(Const.LEVEL).toString() //1 2 3
         val npp=1
-
+        var id = "";
         getDataAct(language, difficult, level, npp)
 
 
@@ -110,8 +110,6 @@ class LevelActivity : AppCompatActivity() {
 
 
 
-
-
         }
 
 
@@ -138,7 +136,7 @@ class LevelActivity : AppCompatActivity() {
     fun getDataAct(language:String, difficult:String, level:String, npp:Int ) {
         var txt="11"
         var en = ""
-        var id = "";
+        var id = ""
         //val myString: String = "Це мій текст"String
         var ger = ""
         var pl = ""
@@ -156,6 +154,14 @@ class LevelActivity : AppCompatActivity() {
                         txt = "$id $en $ger $pl "
                         Toast.makeText(this, language, Toast.LENGTH_SHORT).show()
                         openImage(id, difficult, level)
+                        binding.WomanLevel.setOnClickListener {
+                            when (language) {
+                                "en" -> {hint(en)}
+                                "pl" -> {hint(pl)}
+                                "ger" -> {hint(ger)}
+                            }
+                            hint(id)
+                        }
                         binding.getImage.setOnClickListener {
                             /*if (binding.etImageId.text.toString() == pl) {
                                 var npp = npp + 1
@@ -372,6 +378,7 @@ class LevelActivity : AppCompatActivity() {
 
     fun openImage(id : String, difficult: String, level: String)
     {
+        binding.etImageId.text.clear()
         Toast.makeText(this, "inside open", Toast.LENGTH_SHORT).show()
         Toast.makeText(this, id, Toast.LENGTH_SHORT).show()
         val storageRef = FirebaseStorage.getInstance().reference.child("images/$difficult/$level/$id.jpg")
@@ -406,5 +413,8 @@ class LevelActivity : AppCompatActivity() {
     }
     fun youPressButton(@Suppress("UNUSED_PARAMETER")view : View){
         Toast.makeText(this, "you pressed button OK", Toast.LENGTH_SHORT).show()
+    }
+    fun hint(lang : String){
+        Toast.makeText(this, lang, Toast.LENGTH_SHORT).show()
     }
 }
