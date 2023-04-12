@@ -1,6 +1,7 @@
 package com.example.fluently
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
@@ -24,25 +25,12 @@ class LevelActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLevelBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //val language = intent.extras?.getString(Const.LANGUAGE) //eng deutsch poland
-        //val difficult = intent.extras?.getString(Const.DIFFICULT) //easy middle hard
-        //val level = intent.extras?.getInt(Const.LEVEL).toString() //
-        val language = "pl" //eng deutsch poland
+        val language = intent.extras?.getString(Const.LANGUAGE).toString() //ger pl en
         val difficult = intent.extras?.getString(Const.DIFFICULT).toString() //easy middle hard
-        val level = "7_level" //
+        val level = intent.extras?.getInt(Const.LEVEL).toString() //1 2 3
         val npp=1
 
         getDataAct(language, difficult, level, npp)
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -159,22 +147,92 @@ class LevelActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 Toast.makeText(this, "before for", Toast.LENGTH_SHORT).show()
                 for (documentSnapshot: DocumentSnapshot in it.documents) {
+
                     if (documentSnapshot.id == npp.toString()) {
                         en = documentSnapshot.getString("en").toString()
                         id = documentSnapshot.getString("id").toString()
-                        ger = documentSnapshot.getString("de").toString()
+                        ger = documentSnapshot.getString("ger").toString()
                         pl = documentSnapshot.getString("pl").toString()
                         txt = "$id $en $ger $pl "
-                        Toast.makeText(this, txt, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, language, Toast.LENGTH_SHORT).show()
                         openImage(id)
                         binding.getImage.setOnClickListener {
-                            if (binding.etImageId.text.toString() == en) {
+                            /*if (binding.etImageId.text.toString() == pl) {
                                 var npp = npp + 1
                                 if (npp == 11) {
                                     finish()//треба викликати backtolevels
                                 }
                                 getDataAct(language, difficult, level, npp)
+                            }*/
+
+                            when (language) {
+                                "en" -> {
+                                    if(binding.etImageId.text.toString() == en) {
+                                        var npp = npp + 1
+                                        if (npp == 11) {
+                                            finish()//треба викликати backtolevels
+                                        }
+                                        getDataAct(language, difficult, level, npp)
+                                    }
+                                }
+                                "ger" -> {
+                                    if(binding.etImageId.text.toString() == ger) {
+                                        var npp = npp + 1
+                                        if (npp == 11) {
+                                            finish()//треба викликати backtolevels
+                                        }
+                                        getDataAct(language, difficult, level, npp)
+                                    }
+                                }
+                                "pl" -> {
+                                    if(binding.etImageId.text.toString() == pl) {
+                                        var npp = npp + 1
+                                        if (npp == 11) {
+                                            finish()//треба викликати backtolevels
+                                        }
+                                        getDataAct(language, difficult, level, npp)
+                                    }
+                                }
+                                else -> Toast.makeText(this, "Wrong language", Toast.LENGTH_SHORT).show()
                             }
+
+
+
+
+
+
+                            /*if(language==pl) {
+                                if (binding.etImageId.text.toString() == pl) {
+                                    var npp = npp + 1
+                                    if (npp == 11) {
+                                        finish()//треба викликати backtolevels
+                                    }
+                                    getDataAct(language, difficult, level, npp)
+                                }
+                                else Toast.makeText(this, "Wrong word", Toast.LENGTH_SHORT).show()
+                            }
+                            if(language==ger) {
+                                if (binding.etImageId.text.toString() == ger) {
+                                    var npp = npp + 1
+                                    if (npp == 11) {
+                                        finish()//треба викликати backtolevels
+                                    }
+                                    getDataAct(language, difficult, level, npp)
+                                }
+                                else Toast.makeText(this, "Wrong word", Toast.LENGTH_SHORT).show()
+                            }
+                            if(language==en) {
+                                if (binding.etImageId.text.toString() == en) {
+                                    var npp = npp + 1
+                                    if (npp == 11) {
+                                        finish()//треба викликати backtolevels
+                                    }
+                                    getDataAct(language, difficult, level, npp)
+                                }
+                                else Toast.makeText(this, "Wrong word", Toast.LENGTH_SHORT).show()
+                            }*/
+
+
                         }
                     }
                 }
@@ -310,6 +368,7 @@ class LevelActivity : AppCompatActivity() {
                 Toast.makeText(this, "poland", Toast.LENGTH_SHORT).show()
             }
         }*/
+
 
     fun openImage(id : String)
     {

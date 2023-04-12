@@ -20,17 +20,17 @@ class ChooseLangActivity : AppCompatActivity() {
         when (view.id) {
             R.id.engButton -> {
                 var i = Intent(this, ChooseDifficultActivity::class.java)
-                i.putExtra(Const.LANGUAGE, "eng")
+                i.putExtra(Const.LANGUAGE, "en")
                 startActivity(i)
             }
             R.id.gerButton -> {
                 var i = Intent(this, ChooseDifficultActivity::class.java)
-                i.putExtra(Const.LANGUAGE, "deutsch")
+                i.putExtra(Const.LANGUAGE, "ger")
                 startActivity(i)
             }
             R.id.polButton -> {
                 var i = Intent(this, ChooseDifficultActivity::class.java)
-                i.putExtra(Const.LANGUAGE, "poland")
+                i.putExtra(Const.LANGUAGE, "pl")
                 startActivity(i)
             }
         }
