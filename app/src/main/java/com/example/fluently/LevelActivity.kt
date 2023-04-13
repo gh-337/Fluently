@@ -7,7 +7,9 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.SystemClock
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -170,14 +172,51 @@ class LevelActivity : AppCompatActivity() {
                         txt = "$id $en $ger $pl "
                         Toast.makeText(this, language, Toast.LENGTH_SHORT).show()
                         openImage(id, difficult, level)
-                        binding.WomanLevel.setOnClickListener {
+                        val yourView = binding.WomanLevel
+
+
+
+                        yourView.setOnTouchListener(object : View.OnTouchListener {
+                            public val MAX_CLICK_DURATION = 200
+                            public var startClickTime: Long = 0
+
+                            override fun onTouch(v: View, event: MotionEvent): Boolean {
+                                when (event.action) {
+                                    MotionEvent.ACTION_DOWN -> {
+                                        startClickTime = System.currentTimeMillis()
+                                    }
+                                    MotionEvent.ACTION_UP -> {
+                                        val clickDuration = System.currentTimeMillis() - startClickTime
+                                        if (clickDuration < MAX_CLICK_DURATION) {
+                                            // Виконуємо вашу функцію при подвійному кліку
+                                            if (event.actionMasked == MotionEvent.ACTION_UP && event.getPointerCount() == 1) {
+                                                val time = SystemClock.uptimeMillis().toInt()
+                                                if (time - lastClickTime < DOUBLE_CLICK_TIME_DELTA) {
+                                                    when (language) {
+                                                        "en" -> {hint(en)}
+                                                        "pl" -> {hint(pl)}
+                                                        "ger" -> {hint(ger)}
+                                                    }
+                                                }
+                                                lastClickTime = time
+                                            }
+                                        }
+                                    }
+                                }
+                                return true
+                            }
+                        })
+
+
+                        /*binding.WomanLevel.setOnClickListener {
                             when (language) {
                                 "en" -> {hint(en)}
                                 "pl" -> {hint(pl)}
                                 "ger" -> {hint(ger)}
                             }
-                            hint(id)
-                        }
+                        }*/
+
+
                         binding.getImage.setOnClickListener {
                             /*if (binding.etImageId.text.toString() == pl) {
                                 var npp = npp + 1
@@ -432,5 +471,13 @@ class LevelActivity : AppCompatActivity() {
     }
     fun hint(lang : String){
         Toast.makeText(this, lang, Toast.LENGTH_SHORT).show()
+    }
+    /*new   -------*/
+    fun hintOnClick(lang : String) {
+        Toast.makeText(this, lang, Toast.LENGTH_SHORT).show()
+    }
+    companion object {
+        private const val DOUBLE_CLICK_TIME_DELTA = 300 // мінімальний інтервал часу між кліками
+        private var lastClickTime: Int = 0
     }
 }
