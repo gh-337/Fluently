@@ -238,6 +238,7 @@ class LevelActivity : AppCompatActivity() {
         val myDialog = Dialog(this)
         myDialog.setContentView(dialogBinding)
 
+
         myDialog.setCancelable(false)
         myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         myDialog.show()
