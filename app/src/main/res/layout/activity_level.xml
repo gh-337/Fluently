@@ -57,21 +57,6 @@
         app:layout_constraintVertical_bias="0.8"
         app:srcCompat="@drawable/woman" />
 
-    <!--
-    <EditText
-        android:id="@+id/etImageId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Enter the word"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.556" />-->
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/Search"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -79,12 +64,17 @@
         android:layout_height="wrap_content"
         android:focusable="false"
         android:focusableInTouchMode="true"
+        app:boxStrokeColor="#678A55"
+        app:endIconTint="#668A55"
+        app:hintTextColor="#658954"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.435"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.544">
+        app:layout_constraintVertical_bias="0.544"
+        app:startIconTint="#668954"
+        app:boxBackgroundColor="#F5F5F5">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etImageId"
@@ -92,9 +82,9 @@
             android:layout_height="wrap_content"
             android:hint="Write word"
             android:inputType="text"
+            android:textColorHint="#757575"
+            />
 
-
-            android:textColorHint="#757575" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.constraintlayout.widget.Guideline

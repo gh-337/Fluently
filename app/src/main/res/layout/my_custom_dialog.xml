@@ -16,21 +16,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <!--
-            <TextView
-                android:id="@+id/alert_title"
-                android:layout_width="match_parent"
-                android:layout_gravity="center"
-                android:visibility="visible"
-                android:padding="5dp"
-                android:textColor="@color/purple_500"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="10dp"
-                android:text="Help DesK"
-                android:textStyle="bold"
-                android:textSize="14sp"
-                android:layout_marginStart="10dp"
-                android:layout_height="wrap_content"/>-->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

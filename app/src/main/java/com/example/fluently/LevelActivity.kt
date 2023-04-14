@@ -25,12 +25,12 @@ import org.checkerframework.checker.units.qual.s
 import java.io.File
 
 //11111
-
+var result=0
 
 class LevelActivity : AppCompatActivity() {
     lateinit var binding: ActivityLevelBinding
     val db = FirebaseFirestore.getInstance()
-    val result=0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLevelBinding.inflate(layoutInflater)
@@ -39,25 +39,10 @@ class LevelActivity : AppCompatActivity() {
         val difficult = intent.extras?.getString(Const.DIFFICULT).toString() //easy middle hard
         val level = intent.extras?.getInt(Const.LEVEL).toString() //1 2 3
         val npp=1
-        var id = "";
+        var id = ""
+        result=0
 
         getDataAct(language, difficult, level, npp)
-        /*binding.btn.setOnClickListener {
-            val dialogBinding = layoutInflater.inflate(R.layout.my_custom_dialog,null)
-
-            val myDialog = Dialog(this)
-            myDialog.setContentView(dialogBinding)
-
-            myDialog.setCancelable(true)
-            myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            myDialog.show()
-
-            val yesbtn = dialogBinding.findViewById<Button>(R.id.alert_yes)
-            yesbtn.setOnClickListener {
-                myDialog.dismiss()
-            }
-        }*/
-
 
         }
 
@@ -80,7 +65,6 @@ class LevelActivity : AppCompatActivity() {
                         ger = documentSnapshot.getString("ger").toString()
                         pl = documentSnapshot.getString("pl").toString()
                         txt = "$id $en $ger $pl "
-                        Toast.makeText(this, language, Toast.LENGTH_SHORT).show()
                         openImage(id, difficult, level)
                         val yourView = binding.WomanLevel
 
@@ -122,7 +106,7 @@ class LevelActivity : AppCompatActivity() {
                                     //finish()
                                     checkLang(language, difficult, level, npp, en, ger, pl)
                                 } else
-                                    Toast.makeText(this, "Введіть номер приміщення", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
 
                                 return@setOnKeyListener true
                             } else {
@@ -147,39 +131,36 @@ class LevelActivity : AppCompatActivity() {
 
     }
     fun checkLang(language:String, difficult:String, level:String, npp:Int, en:String, ger:String, pl:String){
-
+        var word=binding.etImageId.text.toString().toLowerCase()
     when (language) {
         "en" -> {
-            if(binding.etImageId.text.toString() == en) {
-                var npp = npp + 1
-                //result=+10
-                if (npp == 4) {
-
-                    // alert_message
+            var npp = npp + 1
+            if(word == en || word == en + " ")
+                result=result+10
+                if (npp == 3) {
                     modalWindow()
                 }
-                getDataAct(language, difficult, level, npp)
-            }
+            getDataAct(language, difficult, level, npp)
         }
         "ger" -> {
-            if(binding.etImageId.text.toString() == ger) {
-                var npp = npp + 1
-                //result=+10
+            var npp = npp + 1
+            if(word == ger || word == ger + " ")
+                result=result+10
                 if (npp == 11) {
                     modalWindow()
                 }
-                getDataAct(language, difficult, level, npp)
-            }
+
+            getDataAct(language, difficult, level, npp)
         }
         "pl" -> {
-            if(binding.etImageId.text.toString() == pl) {
-                var npp = npp + 1
-                //result=+10
+            var npp = npp + 1
+            if(word == pl || word == pl + " ")
+                result=result+10
                 if (npp == 11) {
                     modalWindow()
                 }
-                getDataAct(language, difficult, level, npp)
-            }
+
+            getDataAct(language, difficult, level, npp)
         }
         else -> Toast.makeText(this, "Wrong language", Toast.LENGTH_SHORT).show()
     }}
@@ -187,8 +168,6 @@ class LevelActivity : AppCompatActivity() {
     fun openImage(id : String, difficult: String, level: String)
     {
         binding.etImageId.setText("")
-        Toast.makeText(this, "inside open", Toast.LENGTH_SHORT).show()
-        Toast.makeText(this, id, Toast.LENGTH_SHORT).show()
         val storageRef = FirebaseStorage.getInstance().reference.child("images/$difficult/$level/$id.jpg")
         val localfile = File.createTempFile("tempImage", "jpg")//створюєм тимчасовий файл
 
@@ -240,8 +219,8 @@ class LevelActivity : AppCompatActivity() {
     fun modalWindow() {
         val dialogBinding = layoutInflater.inflate(R.layout.my_custom_dialog,null)
         val resultLevel = dialogBinding.findViewById<TextView>(R.id.alert_message)
-        //resultLevel.text=result.toString() + "/100%"
-        resultLevel.text="100/100%"
+        resultLevel.text=result.toString() + "/100%"
+
         val myDialog = Dialog(this)
         myDialog.setContentView(dialogBinding)
 
@@ -249,7 +228,7 @@ class LevelActivity : AppCompatActivity() {
         myDialog.setCancelable(false)
         myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         myDialog.show()
-
+        result=0
         val yesbtn = dialogBinding.findViewById<Button>(R.id.alert_yes)
         yesbtn.setOnClickListener {
             //myDialog.dismiss()
