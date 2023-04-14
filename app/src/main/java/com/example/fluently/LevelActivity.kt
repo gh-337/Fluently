@@ -67,6 +67,7 @@ class LevelActivity : AppCompatActivity() {
         var id = ""
         var ger = ""
         var pl = ""
+        var result=0
         db.collection(difficult).document("level").collection(level)
             .get()
             .addOnSuccessListener {
@@ -118,7 +119,7 @@ class LevelActivity : AppCompatActivity() {
                             if (i == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_UP) {
                                 if (binding.etImageId.text.toString() != "") {
                                     //finish()
-                                    checkLang(language, difficult, level, npp, en, ger, pl)
+                                    checkLang(language, difficult, level, npp, en, ger, pl, result)
                                 } else
                                     Toast.makeText(this, "Введіть номер приміщення", Toast.LENGTH_SHORT).show()
 
@@ -133,7 +134,7 @@ class LevelActivity : AppCompatActivity() {
 
 
                         binding.getImage.setOnClickListener {
-                            checkLang(language, difficult, level, npp, en, ger, pl)
+                            checkLang(language, difficult, level, npp, en, ger, pl, result)
 
                         }
                     }
@@ -144,15 +145,17 @@ class LevelActivity : AppCompatActivity() {
             }
 
     }
-    fun checkLang(language:String, difficult:String, level:String, npp:Int, en:String, ger:String, pl:String ){
+    fun checkLang(language:String, difficult:String, level:String, npp:Int, en:String, ger:String, pl:String, result:Int){
+
     when (language) {
         "en" -> {
             if(binding.etImageId.text.toString() == en) {
                 var npp = npp + 1
-                if (npp == 3) {
+                var result=result+10
+                if (npp == 4) {
 
                     // alert_message
-                    modalWindow(npp.toString())
+                    modalWindow(result.toString())
                 }
                 getDataAct(language, difficult, level, npp)
             }
@@ -160,8 +163,9 @@ class LevelActivity : AppCompatActivity() {
         "ger" -> {
             if(binding.etImageId.text.toString() == ger) {
                 var npp = npp + 1
+                var result=result+10
                 if (npp == 11) {
-                    modalWindow(npp.toString())
+                    modalWindow(result.toString())
                 }
                 getDataAct(language, difficult, level, npp)
             }
@@ -169,8 +173,9 @@ class LevelActivity : AppCompatActivity() {
         "pl" -> {
             if(binding.etImageId.text.toString() == pl) {
                 var npp = npp + 1
+                var result=result+10
                 if (npp == 11) {
-                    modalWindow(npp.toString())
+                    modalWindow(result.toString())
                 }
                 getDataAct(language, difficult, level, npp)
             }
