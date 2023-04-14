@@ -62,7 +62,6 @@ class LevelActivity : AppCompatActivity() {
         }
 
 
-
     fun getDataAct(language:String, difficult:String, level:String, npp:Int ) {
         var txt="11"
         var en = ""
