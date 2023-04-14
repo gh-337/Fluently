@@ -30,6 +30,7 @@ import java.io.File
 class LevelActivity : AppCompatActivity() {
     lateinit var binding: ActivityLevelBinding
     val db = FirebaseFirestore.getInstance()
+    val result=0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLevelBinding.inflate(layoutInflater)
@@ -39,6 +40,7 @@ class LevelActivity : AppCompatActivity() {
         val level = intent.extras?.getInt(Const.LEVEL).toString() //1 2 3
         val npp=1
         var id = "";
+
         getDataAct(language, difficult, level, npp)
         /*binding.btn.setOnClickListener {
             val dialogBinding = layoutInflater.inflate(R.layout.my_custom_dialog,null)
@@ -67,7 +69,7 @@ class LevelActivity : AppCompatActivity() {
         var id = ""
         var ger = ""
         var pl = ""
-        var result=0
+
         db.collection(difficult).document("level").collection(level)
             .get()
             .addOnSuccessListener {
@@ -119,7 +121,7 @@ class LevelActivity : AppCompatActivity() {
                             if (i == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_UP) {
                                 if (binding.etImageId.text.toString() != "") {
                                     //finish()
-                                    checkLang(language, difficult, level, npp, en, ger, pl, result)
+                                    checkLang(language, difficult, level, npp, en, ger, pl)
                                 } else
                                     Toast.makeText(this, "Введіть номер приміщення", Toast.LENGTH_SHORT).show()
 
@@ -134,7 +136,7 @@ class LevelActivity : AppCompatActivity() {
 
 
                         binding.getImage.setOnClickListener {
-                            checkLang(language, difficult, level, npp, en, ger, pl, result)
+                            checkLang(language, difficult, level, npp, en, ger, pl)
 
                         }
                     }
@@ -145,17 +147,17 @@ class LevelActivity : AppCompatActivity() {
             }
 
     }
-    fun checkLang(language:String, difficult:String, level:String, npp:Int, en:String, ger:String, pl:String, result:Int){
+    fun checkLang(language:String, difficult:String, level:String, npp:Int, en:String, ger:String, pl:String){
 
     when (language) {
         "en" -> {
             if(binding.etImageId.text.toString() == en) {
                 var npp = npp + 1
-                var result=result+10
+                //result=+10
                 if (npp == 4) {
 
                     // alert_message
-                    modalWindow(result.toString())
+                    modalWindow()
                 }
                 getDataAct(language, difficult, level, npp)
             }
@@ -163,9 +165,9 @@ class LevelActivity : AppCompatActivity() {
         "ger" -> {
             if(binding.etImageId.text.toString() == ger) {
                 var npp = npp + 1
-                var result=result+10
+                //result=+10
                 if (npp == 11) {
-                    modalWindow(result.toString())
+                    modalWindow()
                 }
                 getDataAct(language, difficult, level, npp)
             }
@@ -173,9 +175,9 @@ class LevelActivity : AppCompatActivity() {
         "pl" -> {
             if(binding.etImageId.text.toString() == pl) {
                 var npp = npp + 1
-                var result=result+10
+                //result=+10
                 if (npp == 11) {
-                    modalWindow(result.toString())
+                    modalWindow()
                 }
                 getDataAct(language, difficult, level, npp)
             }
@@ -236,10 +238,11 @@ class LevelActivity : AppCompatActivity() {
 
 
 
-    fun modalWindow(r: String) {
+    fun modalWindow() {
         val dialogBinding = layoutInflater.inflate(R.layout.my_custom_dialog,null)
         val resultLevel = dialogBinding.findViewById<TextView>(R.id.alert_message)
-        resultLevel.text=r + "/100%"
+        //resultLevel.text=result.toString() + "/100%"
+        resultLevel.text="100/100%"
         val myDialog = Dialog(this)
         myDialog.setContentView(dialogBinding)
 
