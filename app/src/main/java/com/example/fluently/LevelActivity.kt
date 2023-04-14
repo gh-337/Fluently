@@ -231,10 +231,6 @@ class LevelActivity : AppCompatActivity() {
 
 
 
-    fun goTo(@Suppress("UNUSED_PARAMETER")view : View){
-        val i= Intent(this, Activity2::class.java)
-        startActivity(i)
-    }
     fun modalWindow(r: String) {
         val dialogBinding = layoutInflater.inflate(R.layout.my_custom_dialog,null)
         val resultLevel = dialogBinding.findViewById<TextView>(R.id.alert_message)
