@@ -9,8 +9,12 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.SystemClock
 import android.util.Log
+import android.view.GestureDetector
+import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fluently.databinding.ActivityLevelBinding
@@ -36,7 +40,7 @@ class LevelActivity : AppCompatActivity() {
         val npp=1
         var id = "";
         getDataAct(language, difficult, level, npp)
-        binding.btn.setOnClickListener {
+        /*binding.btn.setOnClickListener {
             val dialogBinding = layoutInflater.inflate(R.layout.my_custom_dialog,null)
 
             val myDialog = Dialog(this)
@@ -46,122 +50,26 @@ class LevelActivity : AppCompatActivity() {
             myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             myDialog.show()
 
-
-
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-        /*val storageRef  = FirebaseStorage.getInstance().reference.child("images/easy/10/$imageName.jpg")
-        val localfile = File.createTempFile("tempImage", "jpg")//створюєм тимчасовий файл
-
-        val progressDialog = ProgressDialog(this)//вивід текту поки чекаємо картинку
-        progressDialog.setMessage("Fetching image....")
-        progressDialog.setCancelable(false)
-        progressDialog.show()
-
-        storageRef.getFile(localfile).addOnSuccessListener{
-            if(progressDialog.isShowing)//якщо вікно є то воно закривається
-                progressDialog.dismiss()
-
-
-            val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)//перетворює файл у зображення
-            binding.imageView.setImageBitmap(bitmap)//отриманий об'єкт Bitmap встановлюється в якості зображення в ImageView
-
-        }.addOnFailureListener{//якщо ні то
-
-            if(progressDialog.isShowing)//якщо вікно є то воно закривається
-                progressDialog.dismiss()
-
-            Toast.makeText(this,"Failed to retrieve thr image",Toast.LENGTH_SHORT).show()
-            //вивід на екран повідомлення що в нас помилка
-
-
-        }
-
-
-
-
-        binding.getImage.setOnClickListener{
-           if(binding.etImageId.text.toString() == "m"){
-               val imageName = "w"
-               val storageRef  = FirebaseStorage.getInstance().reference.child("images/easy/10/$imageName.jpg")
-               val localfile = File.createTempFile("tempImage", "jpg")//створюєм тимчасовий файл
-
-               val progressDialog = ProgressDialog(this)//вивід текту поки чекаємо картинку
-               progressDialog.setMessage("Fetching image....")
-               progressDialog.setCancelable(false)
-               progressDialog.show()
-
-               storageRef.getFile(localfile).addOnSuccessListener{
-                   if(progressDialog.isShowing)//якщо вікно є то воно закривається
-                       progressDialog.dismiss()
-
-
-                   val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)//перетворює файл у зображення
-                   binding.imageView.setImageBitmap(bitmap)//отриманий об'єкт Bitmap встановлюється в якості зображення в ImageView
-
-               }.addOnFailureListener{//якщо ні то
-
-                   if(progressDialog.isShowing)//якщо вікно є то воно закривається
-                       progressDialog.dismiss()
-
-                   Toast.makeText(this,"Failed to retrieve thr image",Toast.LENGTH_SHORT).show()
-                   //вивід на екран повідомлення що в нас помилка
-
-
-               }
-           }
-            else{
-               Toast.makeText(this,"Wrong word",Toast.LENGTH_SHORT).show()
-           }
+            val yesbtn = dialogBinding.findViewById<Button>(R.id.alert_yes)
+            yesbtn.setOnClickListener {
+                myDialog.dismiss()
+            }
         }*/
 
 
-
         }
 
 
-    /*fun getData(view : View) {
-       db.collection("hard").document("level").collection("7_level")
-            .get()
-            .addOnSuccessListener{
-                for(documentSnapshot : DocumentSnapshot in it.documents) {
-                    if(documentSnapshot.id=="n_p_p"){
-                    val surname = documentSnapshot.getString("en").toString()
-                    val s = documentSnapshot.getString("id").toString()
-                    val name = documentSnapshot.getString("ger").toString()
-                    val patronymic = documentSnapshot.getString("pl").toString()
-                    txt = "$surname $name $patronymic $s"
-                        Toast.makeText(this,txt,Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
-            .addOnFailureListener {
-                Log.w("TAG", "Error getting documents: ")
-            }
-    }*/
 
     fun getDataAct(language:String, difficult:String, level:String, npp:Int ) {
         var txt="11"
         var en = ""
         var id = ""
-        //val myString: String = "Це мій текст"String
         var ger = ""
         var pl = ""
         db.collection(difficult).document("level").collection(level)
             .get()
             .addOnSuccessListener {
-                Toast.makeText(this, "before for", Toast.LENGTH_SHORT).show()
                 for (documentSnapshot: DocumentSnapshot in it.documents) {
 
                     if (documentSnapshot.id == npp.toString()) {
@@ -173,8 +81,6 @@ class LevelActivity : AppCompatActivity() {
                         Toast.makeText(this, language, Toast.LENGTH_SHORT).show()
                         openImage(id, difficult, level)
                         val yourView = binding.WomanLevel
-
-
 
                         yourView.setOnTouchListener(object : View.OnTouchListener {
                             public val MAX_CLICK_DURATION = 200
@@ -207,92 +113,27 @@ class LevelActivity : AppCompatActivity() {
                             }
                         })
 
+                        /*----*/
+                        binding.etImageId.setOnKeyListener { _, i, keyEvent ->
+                            if (i == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_UP) {
+                                if (binding.etImageId.text.toString() != "") {
+                                    //finish()
+                                    checkLang(language, difficult, level, npp, en, ger, pl)
+                                } else
+                                    Toast.makeText(this, "Введіть номер приміщення", Toast.LENGTH_SHORT).show()
 
-                        /*binding.WomanLevel.setOnClickListener {
-                            when (language) {
-                                "en" -> {hint(en)}
-                                "pl" -> {hint(pl)}
-                                "ger" -> {hint(ger)}
+                                return@setOnKeyListener true
+                            } else {
+
+                                false
                             }
-                        }*/
+                        }
+                        /*----*/
+
 
 
                         binding.getImage.setOnClickListener {
-                            /*if (binding.etImageId.text.toString() == pl) {
-                                var npp = npp + 1
-                                if (npp == 11) {
-                                    finish()//треба викликати backtolevels
-                                }
-                                getDataAct(language, difficult, level, npp)
-                            }*/
-
-                            when (language) {
-                                "en" -> {
-                                    if(binding.etImageId.text.toString() == en) {
-                                        var npp = npp + 1
-                                        if (npp == 11) {
-                                            finish()//треба викликати backtolevels
-                                        }
-                                        getDataAct(language, difficult, level, npp)
-                                    }
-                                }
-                                "ger" -> {
-                                    if(binding.etImageId.text.toString() == ger) {
-                                        var npp = npp + 1
-                                        if (npp == 11) {
-                                            finish()//треба викликати backtolevels
-                                        }
-                                        getDataAct(language, difficult, level, npp)
-                                    }
-                                }
-                                "pl" -> {
-                                    if(binding.etImageId.text.toString() == pl) {
-                                        var npp = npp + 1
-                                        if (npp == 11) {
-                                            finish()//треба викликати backtolevels
-                                        }
-                                        getDataAct(language, difficult, level, npp)
-                                    }
-                                }
-                                else -> Toast.makeText(this, "Wrong language", Toast.LENGTH_SHORT).show()
-                            }
-
-
-
-
-
-
-                            /*if(language==pl) {
-                                if (binding.etImageId.text.toString() == pl) {
-                                    var npp = npp + 1
-                                    if (npp == 11) {
-                                        finish()//треба викликати backtolevels
-                                    }
-                                    getDataAct(language, difficult, level, npp)
-                                }
-                                else Toast.makeText(this, "Wrong word", Toast.LENGTH_SHORT).show()
-                            }
-                            if(language==ger) {
-                                if (binding.etImageId.text.toString() == ger) {
-                                    var npp = npp + 1
-                                    if (npp == 11) {
-                                        finish()//треба викликати backtolevels
-                                    }
-                                    getDataAct(language, difficult, level, npp)
-                                }
-                                else Toast.makeText(this, "Wrong word", Toast.LENGTH_SHORT).show()
-                            }
-                            if(language==en) {
-                                if (binding.etImageId.text.toString() == en) {
-                                    var npp = npp + 1
-                                    if (npp == 11) {
-                                        finish()//треба викликати backtolevels
-                                    }
-                                    getDataAct(language, difficult, level, npp)
-                                }
-                                else Toast.makeText(this, "Wrong word", Toast.LENGTH_SHORT).show()
-                            }*/
-
+                            checkLang(language, difficult, level, npp, en, ger, pl)
 
                         }
                     }
@@ -302,138 +143,44 @@ class LevelActivity : AppCompatActivity() {
                 Log.w("TAG", "Error getting documents: ")
             }
 
-        /*Toast.makeText(this, txt, Toast.LENGTH_SHORT).show()
-        val storageRef = FirebaseStorage.getInstance().reference.child("images/easy/1/$id.jpg")
-        val localfile = File.createTempFile("tempImage", "jpg")//створюєм тимчасовий файл
-
-        val progressDialog = ProgressDialog(this)//вивід текту поки чекаємо картинку
-        progressDialog.setMessage("Fetching image....")
-        progressDialog.setCancelable(false)
-        progressDialog.show()
-
-        storageRef.getFile(localfile).addOnSuccessListener {
-            if (progressDialog.isShowing)//якщо вікно є то воно закривається
-                progressDialog.dismiss()
-
-
-            val bitmap =
-                BitmapFactory.decodeFile(localfile.absolutePath)//перетворює файл у зображення
-            binding.imageView.setImageBitmap(bitmap)//отриманий об'єкт Bitmap встановлюється в якості зображення в ImageView
-
-        }.addOnFailureListener {//якщо ні то
-
-            if (progressDialog.isShowing)//якщо вікно є то воно закривається
-                progressDialog.dismiss()
-
-            Toast.makeText(this, "Failed to retrieve thr image", Toast.LENGTH_SHORT).show()
-            //вивід на екран повідомлення що в нас помилка
-
-
-        }*/
-
-        /*binding.getImage.setOnClickListener {
-            if (binding.etImageId.text.toString() == "en") {
+    }
+    fun checkLang(language:String, difficult:String, level:String, npp:Int, en:String, ger:String, pl:String ){
+    when (language) {
+        "en" -> {
+            if(binding.etImageId.text.toString() == en) {
                 var npp = npp + 1
-                if (npp == 11) {
-                    finish()//треба викликати backtolevels
+                if (npp == 3) {
+
+                    // alert_message
+                    modalWindow(npp.toString())
                 }
                 getDataAct(language, difficult, level, npp)
             }
-        }*/
-
-
-    }
-
-
-
-
-
-
-        /*new*/
-        /*intent.extras?.getString(Const.LANGUAGE)
-        intent.extras?.getString(Const.DIFFICULT)
-        intent.extras?.getInt(Const.LEVEL)
-        when (intent.extras?.getString(Const.LANGUAGE)) {
-            "eng" -> {
-                Toast.makeText(this, "eng", Toast.LENGTH_SHORT).show()
-            }
-            "deutsch" -> {
-                Toast.makeText(this, "deutsch", Toast.LENGTH_SHORT).show()
-            }*/
-                /*---new----*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*
-        binding.getImage.setOnClickListener{//чекаємо на натискання кнопки
-
-            val progressDialog = ProgressDialog(this)//вивід текту поки чекаємо картинку
-            progressDialog.setMessage("Fetching image....")
-            progressDialog.setCancelable(false)
-            progressDialog.show()
-
-
-            val imageName = binding.etImageId.text.toString() // текст з поля записуєм у змінну
-            val storageRef  = FirebaseStorage.getInstance().reference.child("images/$imageName.jpg") //у змінну записуєм шлях до картинки у бд
-
-            val localfile = File.createTempFile("tempImage", "jpg")//створюєм тимчасовий файл
-            storageRef.getFile(localfile).addOnSuccessListener{
-            //завантажує файл з бд у локал файл
-            //якщо завантаження завершиться успішно виконається код
-
-                if(progressDialog.isShowing)//якщо вікно є то воно закривається
-                    progressDialog.dismiss()
-
-
-                val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)//перетворює файл у зображення
-                binding.imageView.setImageBitmap(bitmap)//отриманий об'єкт Bitmap встановлюється в якості зображення в ImageView
-
-            }.addOnFailureListener{//якщо ні то
-
-                if(progressDialog.isShowing)//якщо вікно є то воно закривається
-                    progressDialog.dismiss()
-
-                Toast.makeText(this,"Failed to retrieve thr image",Toast.LENGTH_SHORT).show()
-                //вивід на екран повідомлення що в нас помилка
-
+        }
+        "ger" -> {
+            if(binding.etImageId.text.toString() == ger) {
+                var npp = npp + 1
+                if (npp == 11) {
+                    modalWindow(npp.toString())
+                }
+                getDataAct(language, difficult, level, npp)
             }
         }
-
-
-        //Toast.makeText(this, intent.extras?.getString("Lang").toString(), Toast.LENGTH_SHORT).show()
-        Toast.makeText(this, intent.extras?.getString(Const.LANGUAGE), Toast.LENGTH_SHORT).show()
-        Toast.makeText(this, intent.extras?.getString(Const.DIFFICULT), Toast.LENGTH_SHORT).show()
-        Toast.makeText(this, intent.extras?.getInt(Const.LEVEL).toString(), Toast.LENGTH_SHORT).show()
-    }
-    */
-
-    /*     має бути перевірка...
-            when (intent.extras?.getString(Const.LANGUAGE)) {
-            "eng" -> {
-                Toast.makeText(this, "eng", Toast.LENGTH_SHORT).show()
+        "pl" -> {
+            if(binding.etImageId.text.toString() == pl) {
+                var npp = npp + 1
+                if (npp == 11) {
+                    modalWindow(npp.toString())
+                }
+                getDataAct(language, difficult, level, npp)
             }
-            "deutsch" -> {
-                Toast.makeText(this, "deutsch", Toast.LENGTH_SHORT).show()
-            }
-            "poland" -> {
-                Toast.makeText(this, "poland", Toast.LENGTH_SHORT).show()
-            }
-        }*/
-
+        }
+        else -> Toast.makeText(this, "Wrong language", Toast.LENGTH_SHORT).show()
+    }}
 
     fun openImage(id : String, difficult: String, level: String)
     {
-        binding.etImageId.text.clear()
+        binding.etImageId.setText("")
         Toast.makeText(this, "inside open", Toast.LENGTH_SHORT).show()
         Toast.makeText(this, id, Toast.LENGTH_SHORT).show()
         val storageRef = FirebaseStorage.getInstance().reference.child("images/$difficult/$level/$id.jpg")
@@ -479,5 +226,30 @@ class LevelActivity : AppCompatActivity() {
     companion object {
         private const val DOUBLE_CLICK_TIME_DELTA = 300 // мінімальний інтервал часу між кліками
         private var lastClickTime: Int = 0
+    }
+
+
+
+
+    fun goTo(@Suppress("UNUSED_PARAMETER")view : View){
+        val i= Intent(this, Activity2::class.java)
+        startActivity(i)
+    }
+    fun modalWindow(r: String) {
+        val dialogBinding = layoutInflater.inflate(R.layout.my_custom_dialog,null)
+        val resultLevel = dialogBinding.findViewById<TextView>(R.id.alert_message)
+        resultLevel.text=r + "/100%"
+        val myDialog = Dialog(this)
+        myDialog.setContentView(dialogBinding)
+
+        myDialog.setCancelable(false)
+        myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        myDialog.show()
+
+        val yesbtn = dialogBinding.findViewById<Button>(R.id.alert_yes)
+        yesbtn.setOnClickListener {
+            //myDialog.dismiss()
+            finish()
+        }
     }
 }
