@@ -34,7 +34,7 @@
         android:id="@+id/imageButton3"
         android:layout_width="53dp"
         android:layout_height="52dp"
-        android:background="@drawable/buttongoback"
+        android:background="@drawable/goback"
         android:onClick="backToChooseLang"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -43,7 +43,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.091"
-        app:srcCompat="@drawable/buttongoback" />
+        app:srcCompat="@drawable/goback" />
 
     <ImageButton
         android:id="@+id/imageButton4"
