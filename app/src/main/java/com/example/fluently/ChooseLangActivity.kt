@@ -18,17 +18,17 @@ class ChooseLangActivity : AppCompatActivity() {
 
     fun goToChooseDifficult(view : View){
         when (view.id) {
-            R.id.engButton -> {
+            R.id.eng_button -> {
                 var i = Intent(this, ChooseDifficultActivity::class.java)
                 i.putExtra(Const.LANGUAGE, "en")
                 startActivity(i)
             }
-            R.id.gerButton -> {
+            R.id.ger_button -> {
                 var i = Intent(this, ChooseDifficultActivity::class.java)
                 i.putExtra(Const.LANGUAGE, "ger")
                 startActivity(i)
             }
-            R.id.polButton -> {
+            R.id.pol_button -> {
                 var i = Intent(this, ChooseDifficultActivity::class.java)
                 i.putExtra(Const.LANGUAGE, "pl")
                 startActivity(i)

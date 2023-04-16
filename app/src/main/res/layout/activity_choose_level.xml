@@ -7,7 +7,7 @@
     android:background="@color/Back">
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/mountain_choose_level"
         android:layout_width="642dp"
         android:layout_height="811dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,7 +19,7 @@
         app:srcCompat="@drawable/mount" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/woman_chose_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -30,7 +30,7 @@
         app:srcCompat="@drawable/woman" />
 
     <ImageButton
-        android:id="@+id/imageButton7"
+        android:id="@+id/btn_back_to_diff"
         android:layout_width="57dp"
         android:layout_height="56dp"
         android:background="@drawable/goback"
@@ -61,5 +61,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         tools:listitem="@layout/button_level_item" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,7 +8,7 @@
     tools:context=".DescriptionActivity">
 
     <ImageView
-        android:id="@+id/mountainDescrip"
+        android:id="@+id/mountain_descrip"
         android:layout_width="491dp"
         android:layout_height="727dp"
         android:layout_marginBottom="-160dp"
@@ -20,7 +20,7 @@
         app:srcCompat="@drawable/mountaindescrip" />
 
     <ImageView
-        android:id="@+id/descropText"
+        android:id="@+id/text_descrip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="fitCenter"
@@ -32,7 +32,7 @@
         app:srcCompat="@drawable/descriptext" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/button_back_to_main"
         android:layout_width="55dp"
         android:layout_height="54dp"
         android:background="@drawable/goback"
@@ -46,7 +46,7 @@
         app:srcCompat="@drawable/goback" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/woman_descrip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="fitCenter"

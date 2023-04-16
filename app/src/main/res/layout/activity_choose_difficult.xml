@@ -8,7 +8,7 @@
     tools:context=".ChooseDifficultActivity">
 
     <ImageView
-        android:id="@+id/mountainChooseDifficult"
+        android:id="@+id/mountain_difficult"
         android:layout_width="516dp"
         android:layout_height="780dp"
         android:layout_marginBottom="-100dp"
@@ -19,7 +19,7 @@
         app:srcCompat="@drawable/mount" />
 
     <ImageView
-        android:id="@+id/backButtonsChooseDifficult"
+        android:id="@+id/background_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -31,7 +31,7 @@
         app:srcCompat="@drawable/backchangedifficult" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/btn_back_to_lang"
         android:layout_width="53dp"
         android:layout_height="52dp"
         android:background="@drawable/goback"
@@ -46,11 +46,11 @@
         app:srcCompat="@drawable/goback" />
 
     <ImageButton
-        android:id="@+id/imageButton4"
+        android:id="@+id/easy_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/easy"
-        android:onClick="goToEasyLevel"
+        android:onClick="goToChooseLevel"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,11 +61,10 @@
         app:srcCompat="@drawable/easy" />
 
     <ImageButton
-        android:id="@+id/imageButton5"
+        android:id="@+id/middle_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/medium"
-        android:onClick="goToEasyLevel"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,11 +75,10 @@
         app:srcCompat="@drawable/medium" />
 
     <ImageButton
-        android:id="@+id/imageButton6"
+        android:id="@+id/hard_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/hard"
-        android:onClick="goToEasyLevel"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -91,7 +89,7 @@
         app:srcCompat="@drawable/hard" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -103,7 +101,7 @@
         app:srcCompat="@drawable/woman" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/text_difficult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

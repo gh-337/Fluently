@@ -8,7 +8,7 @@
     tools:context=".ChooseLangActivity">
 
     <ImageView
-        android:id="@+id/mountainLang"
+        android:id="@+id/mountain_lang"
         android:layout_width="536dp"
         android:layout_height="798dp"
         android:layout_marginTop="-10dp"
@@ -23,7 +23,7 @@
         app:srcCompat="@drawable/mount" />
 
     <ImageButton
-        android:id="@+id/engButton"
+        android:id="@+id/eng_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/english"
@@ -38,7 +38,7 @@
         app:srcCompat="@drawable/english" />
 
     <ImageButton
-        android:id="@+id/gerButton"
+        android:id="@+id/ger_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/germany"
@@ -52,7 +52,7 @@
         app:srcCompat="@drawable/germany" />
 
     <ImageButton
-        android:id="@+id/polButton"
+        android:id="@+id/pol_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -66,7 +66,7 @@
         app:srcCompat="@drawable/polish" />
 
     <ImageView
-        android:id="@+id/textChooseLang"
+        android:id="@+id/text_choose_lang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/chooselang"
@@ -80,7 +80,7 @@
         app:srcCompat="@drawable/chooselang" />
 
     <ImageView
-        android:id="@+id/womanChooseLang"
+        android:id="@+id/woman_choose_lang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -92,7 +92,7 @@
         app:srcCompat="@drawable/woman" />
 
     <ImageButton
-        android:id="@+id/backToMain"
+        android:id="@+id/btn_back_to_main"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:background="@drawable/goback"

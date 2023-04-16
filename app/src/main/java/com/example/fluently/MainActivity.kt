@@ -14,12 +14,10 @@ class MainActivity : AppCompatActivity() {
         bindingM=inflate(layoutInflater)
         setContentView(bindingM.root)
     }
-
     fun goToChooseLang(@Suppress("UNUSED_PARAMETER")view : View){
         val i= Intent(this, ChooseLangActivity::class.java)
         startActivity(i)
     }
-
     fun goToDescription(@Suppress("UNUSED_PARAMETER")view : View){
         val i= Intent(this, DescriptionActivity::class.java)
         startActivity(i)
