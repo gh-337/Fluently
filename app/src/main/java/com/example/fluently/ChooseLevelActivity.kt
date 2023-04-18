@@ -6,9 +6,6 @@ import android.content.Intent
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.fluently.databinding.ActivityChooseLevelBinding
-import org.checkerframework.checker.units.qual.m
-
-
 class ChooseLevelActivity : AppCompatActivity() {
     private lateinit var binding: ActivityChooseLevelBinding
 

@@ -8,9 +8,9 @@ class DescriptionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_description)
-
     }
     fun backToMainFromDescip(view: View){
         finish()
     }
 }
+

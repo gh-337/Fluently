@@ -61,7 +61,6 @@ class LevelActivity : AppCompatActivity() {
                         yourView.setOnTouchListener(object : View.OnTouchListener {
                             public val MAX_CLICK_DURATION = 200
                             public var startClickTime: Long = 0
-
                             override fun onTouch(v: View, event: MotionEvent): Boolean {
                                 when (event.action) {
                                     MotionEvent.ACTION_DOWN -> {
@@ -81,9 +80,7 @@ class LevelActivity : AppCompatActivity() {
                                                     }
                                                 }
                                                 lastClickTime = time
-                                            }
-                                        }
-                                    }
+                                            } } }
                                 }
                                 return true
                             }
@@ -112,7 +109,8 @@ class LevelActivity : AppCompatActivity() {
                 Log.w("TAG", "Error getting documents: ")
             }
     }
-    fun checkLang(language:String, difficult:String, level:String, npp:Int, en:String, ger:String, pl:String){
+    fun checkLang(language:String, difficult:String, level:String,
+                  npp:Int, en:String, ger:String, pl:String){
         var word=binding.etImageId.text.toString().toLowerCase()
     when (language) {
         "en" -> {
@@ -168,9 +166,6 @@ class LevelActivity : AppCompatActivity() {
         finish()
     }
     fun hint(lang : String){
-        Toast.makeText(this, lang, Toast.LENGTH_SHORT).show()
-    }
-    fun hintOnClick(lang : String) {
         Toast.makeText(this, lang, Toast.LENGTH_SHORT).show()
     }
     companion object {

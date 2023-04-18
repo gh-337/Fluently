@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fluently.databinding.ButtonLevelItemBinding
 import com.google.android.material.internal.ContextUtils.getActivity
 
-class ButtonLevelAdapter(private val list:List<ButtonLevel>): RecyclerView.Adapter<ButtonLevelAdapter.ButtonLevelHolder>() {
+class ButtonLevelAdapter(private val list:List<ButtonLevel>):
+    RecyclerView.Adapter<ButtonLevelAdapter.ButtonLevelHolder>() {
 
     private val searchBtn= ArrayList<ButtonLevel>()
     var txt=0
