@@ -21,6 +21,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import java.io.File
 
+//luticc
+
 var result=0
 class LevelActivity : AppCompatActivity() {
     lateinit var binding: ActivityLevelBinding
@@ -103,6 +105,7 @@ class LevelActivity : AppCompatActivity() {
                             checkLang(language, difficult, level, npp, en, ger, pl)
                         }
                     }
+
                 }
             }
             .addOnFailureListener {
@@ -117,7 +120,7 @@ class LevelActivity : AppCompatActivity() {
             var npp = npp + 1
             if(word == en || word == en + " ")
                 result=result+10
-                if (npp == 3)
+                if (npp == 11)
                     modalWindow()
             getDataAct(language, difficult, level, npp)
         }
